@@ -1,0 +1,27 @@
+# Log record attributes: https://docs.python.org/3/library/logging.html#logrecord-attributes
+# Log levels: DEBUG, INFO, WARNING, ERROR, FATAL
+version: 1
+formatters:
+  logFormatter:
+    format: "%(asctime)s | %(levelname)-8s | %(filename)s-%(funcName)s-%(lineno)04d | %(message)s"
+  consoleFormatter:
+    format: "%(levelname)-8s | %(filename)s-%(funcName)s-%(lineno)04d | %(message)s"
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: consoleFormatter
+    stream: ext://sys.stdout
+  file:
+    class: logging.FileHandler
+    level: DEBUG
+    formatter: logFormatter
+    filename: "Data/Logs/debugging_file.log"
+loggers:
+  main:
+    level: DEBUG
+    handlers: [console, file]
+    propagate: no
+root:
+  level: DEBUG
+  handlers: [console, file]
